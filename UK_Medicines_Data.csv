@@ -1,0 +1,67 @@
+medicine_name,formula,dose,manufacturer,price,rating
+Aspirin,Aspirin,300mg tablets (28 pack),Bayer AG,£3.36,4.0
+Aspirin Low-dose,Aspirin,75mg tablets (28 pack),Bayer AG,£0.56,4.5
+Aspirin (Analgesic),Aspirin,300mg tablets (32 pack),Bayer AG,£3.84,4.0
+Aspirin (Antiplatelet),Aspirin,75mg tablets (56 pack),Bayer AG,£1.12,4.5
+Aspirin 150mg suppositories,Aspirin,150mg suppositories (10 pack),Bayer AG,£28.99,3.5
+Aspirin 15mg/5ml oral liquid,Aspirin,15mg/5ml oral liquid (150ml),Bayer AG,£4.50,4.0
+Aspirin 25mg capsules,Aspirin,25mg capsules (30 pack),Bayer AG,£2.40,4.0
+Aspirin 25mg/5ml oral liquid,Aspirin,25mg/5ml oral liquid (150ml),Bayer AG,£5.25,3.5
+Aspirin 300mg dispersible tablets,Aspirin,300mg dispersible tablets (30 pack),Bayer AG,£0.90,4.5
+Aspirin 300mg gastro-resistant tablets,Aspirin,300mg gastro-resistant tablets (28 pack),Bayer AG,£14.42,5.0
+Ibuprofen,Ibuprofen,200mg tablets (16 pack),Reckitt Benckiser,£2.40,4.5
+Ibuprofen 400mg tablets,Ibuprofen,400mg tablets (24 pack),Reckitt Benckiser,£6.00,4.5
+Ibuprofen 600mg tablets,Ibuprofen,600mg tablets (20 pack),Reckitt Benckiser,£7.00,4.0
+Paracetamol,Paracetamol,500mg tablets (32 pack),GlaxoSmithKline,£3.20,5.0
+Paracetamol 250mg tablets,Paracetamol,250mg tablets (24 pack),GlaxoSmithKline,£1.92,4.5
+Paracetamol 1000mg tablets,Paracetamol,1000mg tablets (16 pack),GlaxoSmithKline,£2.88,5.0
+Aspirin (Bayer),Acetylsalicylic Acid,75mg gastro-resistant tablets (28 pack),Bayer,£2.50,4.2
+Aspirin (Teva),Acetylsalicylic Acid,75mg gastro-resistant tablets (28 pack),Teva,£1.80,4.0
+Aspirin (GSK),Acetylsalicylic Acid,300mg dispersible tablets (32 pack),GlaxoSmithKline,£3.20,4.1
+Aspirin (Generic),Acetylsalicylic Acid,300mg dispersible tablets (32 pack),Generic Manufacturer,£1.20,3.8
+Aspirin Suppositories,Acetylsalicylic Acid,150mg suppositories (10 pack),Reckitt Benckiser,£4.50,3.9
+Paracetamol (Pfizer),Paracetamol,500mg tablets (32 pack),Pfizer,£5.80,4.6
+Paracetamol (Teva),Paracetamol,500mg tablets (32 pack),Teva,£2.30,4.3
+Paracetamol (GSK),Paracetamol,500mg tablets (32 pack),GlaxoSmithKline,£3.90,4.7
+Nurofen,Ibuprofen,400mg coated tablets (24 pack),Reckitt Benckiser,£6.20,4.8
+Ibuprofen (Generic),Ibuprofen,400mg coated tablets (24 pack),Generic Manufacturer,£2.80,4.1
+Ibuprofen (Boots),Ibuprofen,400mg coated tablets (24 pack),Boots,£4.10,4.4
+Piriton,Chlorphenamine Maleate,4mg tablets (28 pack),GlaxoSmithKline,£4.50,4.2
+Chlorphenamine,Chlorphenamine Maleate,4mg tablets (28 pack),Generic Manufacturer,£2.20,3.9
+Cetirizine,Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),UCB Pharma,£8.90,4.5
+Cetirizine (Teva),Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),Teva,£3.50,4.2
+Benadryl,Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),Johnson & Johnson,£5.20,4.3
+Loratadine,Loratadine,10mg film-coated tablets (30 pack),Merck,£12.80,4.6
+Loratadine (Generic),Loratadine,10mg film-coated tablets (30 pack),Generic Manufacturer,£4.80,4.1
+Clarityn,Loratadine,10mg film-coated tablets (30 pack),Bayer,£9.60,4.7
+Omeprazole,Omeprazole,20mg gastro-resistant capsules (28 pack),AstraZeneca,£28.50,4.8
+Omeprazole (Teva),Omeprazole,20mg gastro-resistant capsules (28 pack),Teva,£15.20,4.4
+Losec,Omeprazole,20mg gastro-resistant capsules (28 pack),AstraZeneca,£35.80,4.9
+Hydrocortisone,Hydrocortisone,1% cream (15g tube),Pfizer,£8.90,4.3
+Hydrocortisone (Generic),Hydrocortisone,1% cream (15g tube),Generic Manufacturer,£4.50,4.0
+Dermacort,Hydrocortisone,1% cream (15g tube),Alliance Pharmaceuticals,£7.20,4.2
+Eumovate,Clobetasone Butyrate,0.05% cream (30g tube),GlaxoSmithKline,£18.50,4.6
+Clobetasone,Clobetasone Butyrate,0.05% cream (30g tube),Teva,£12.80,4.2
+Benylin,Dextromethorphan,15mg/5ml oral solution (125ml bottle),Johnson & Johnson,£6.80,4.4
+Dextromethorphan,Dextromethorphan,15mg/5ml oral solution (125ml bottle),Generic Manufacturer,£3.20,3.9
+Tixylix,Pholcodine,5mg/5ml linctus (200ml bottle),Novartis,£5.90,4.3
+Pholcodine,Pholcodine,5mg/5ml linctus (200ml bottle),Generic Manufacturer,£2.80,4.0
+Metformin,Metformin Hydrochloride,500mg film-coated tablets (84 pack),Teva,£8.90,4.5
+Metformin (Accord),Metformin Hydrochloride,500mg film-coated tablets (84 pack),Accord Healthcare,£7.50,4.3
+Glucophage,Metformin Hydrochloride,500mg film-coated tablets (84 pack),Merck,£12.40,4.7
+Amoxicillin,Amoxicillin,500mg capsules (21 pack),GlaxoSmithKline,£18.70,4.6
+Amoxicillin (Sandoz),Amoxicillin,500mg capsules (21 pack),Sandoz,£12.30,4.4
+Amoxil,Amoxicillin,500mg capsules (21 pack),GlaxoSmithKline,£22.60,4.8
+Simvastatin,Simvastatin,40mg film-coated tablets (28 pack),Pfizer,£12.40,4.5
+Simvastatin (Teva),Simvastatin,40mg film-coated tablets (28 pack),Teva,£6.80,4.2
+Zocor,Simvastatin,40mg film-coated tablets (28 pack),Merck,£18.90,4.7
+Atorvastatin,Atorvastatin,20mg film-coated tablets (28 pack),Pfizer,£25.60,4.6
+Atorvastatin (Accord),Atorvastatin,20mg film-coated tablets (28 pack),Accord Healthcare,£12.80,4.3
+Lipitor,Atorvastatin,20mg film-coated tablets (28 pack),Pfizer,£35.20,4.9
+Calpol,Paracetamol,250mg/5ml oral suspension (100ml bottle),Johnson & Johnson,£4.80,4.8
+Paracetamol Suspension,Paracetamol,500mg/5ml oral suspension (200ml bottle),Generic Manufacturer,£6.20,4.2
+Nurofen For Children,Ibuprofen,100mg/5ml oral suspension (100ml bottle),Reckitt Benckiser,£8.40,4.7
+Ibuprofen Capsules,Ibuprofen,200mg capsules (30 pack),Boots,£5.60,4.3
+Cetirizine Solution,Cetirizine Hydrochloride,1mg/ml oral solution (200ml bottle),UCB Pharma,£12.50,4.4
+Omeprazole Suspension,Omeprazole,10mg/ml oral suspension (30ml bottle),AstraZeneca,£45.80,4.6
+Metformin 850mg,Metformin Hydrochloride,850mg film-coated tablets (56 pack),Teva,£11.90,4.4
