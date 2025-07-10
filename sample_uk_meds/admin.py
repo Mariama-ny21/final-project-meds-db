@@ -12,6 +12,7 @@ class MedicineAdmin(admin.ModelAdmin):
         'dose',
         'get_price_display',
         'get_rating_display',
+        'emc_leaflet_url',
     ]
     list_filter = ['manufacturer', 'rating']
     search_fields = ['medicine_name', 'formula', 'manufacturer']
@@ -36,7 +37,7 @@ class MedicineAdmin(admin.ModelAdmin):
             'fields': ('medicine_name', 'formula', 'dose')
         }),
         ('Commercial Details', {
-            'fields': ('manufacturer', 'price', 'rating')
+            'fields': ('manufacturer', 'price', 'rating', 'emc_leaflet_url')
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at'),

@@ -9,21 +9,30 @@ class Command(BaseCommand):
         with open('UK_Medicines_Data.csv', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             count = 0
+            skipped = 0
             for row in reader:
                 price_str = row['price'].replace('£', '').strip()
                 try:
                     price = float(price_str)
                 except ValueError:
                     price = 0.0
-                # Use the correct column name for rating
                 rating = float(row.get('rating', row.get('rating (Demo only)', 0)))
-                Medicine.objects.create(
+                exists = Medicine.objects.filter(
                     medicine_name=row['medicine_name'],
                     formula=row['formula'],
                     dose=row['dose'],
                     manufacturer=row['manufacturer'],
-                    price=price,
-                    rating=rating,
-                )
-                count += 1
-            self.stdout.write(self.style.SUCCESS(f'Imported {count} medicines.'))
+                ).exists()
+                if not exists:
+                    Medicine.objects.create(
+                        medicine_name=row['medicine_name'],
+                        formula=row['formula'],
+                        dose=row['dose'],
+                        manufacturer=row['manufacturer'],
+                        price=price,
+                        rating=rating,
+                    )
+                    count += 1
+                else:
+                    skipped += 1
+            self.stdout.write(self.style.SUCCESS(f'Imported {count} medicines. Skipped {skipped} duplicates.'))

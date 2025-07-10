@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - UK Medicines Finder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main-navy-heading {
+            color: #0d6efd !important;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 1px 2px 8px rgba(13,110,253,0.08), 0 1px 0 #fff;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        .main-navy-heading .headline-underline {
+            border-bottom: 4px solid #0d6efd;
+            padding-bottom: 2px;
+            color: #0d6efd !important;
+        }
+    </style>
+</head>
+<body style="background: #fff !important;">
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 85vh; background: #fff;">
+        <div style="width: 100%; max-width: 1100px; padding: 24px 0 16px 0;">
+            <div class="text-center mb-3">
+                <span class="fs-1 text-primary" style="font-size: 3.2rem;">&#128137;</span>
+            </div>
+            <h1 class="text-center mb-3 display-4 main-navy-heading">Welcome to <span class="headline-underline">UK Medicines Finder</span></h1>
+            <p class="text-center mb-4" style="font-size: 1.5rem; line-height: 2.2rem; color: #198754; margin-top: 2.7rem;">
+                A comprehensive, user-friendly medicine database and search platform.<br>
+                Compare medicines, access trusted information, and make informed choices.
+            </p>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-10">
+                    <h5 class="text-center mb-3" style="font-size: 2rem;">Who is this for?</h5>
+                    <ul class="list-group list-group-flush mb-3">
+                        <li class="list-group-item text-center py-2 fs-5">Charity Organisations</li>
+                        <li class="list-group-item text-center py-2 fs-5">Consumers &amp; Patients</li>
+                        <li class="list-group-item text-center py-2 fs-5">Healthcare Professionals</li>
+                        <li class="list-group-item text-center py-2 fs-5">Pharmaceutical Manufacturers</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mb-3" style="gap: 0.5rem;">
+                <a href="{% url 'medicine_list' %}" class="btn btn-primary btn-lg px-4 py-2 fs-5 mx-2">Browse Medicines</a>
+                {% if user.is_authenticated %}
+                    <span class="mx-2 fs-5 align-self-center">Welcome, {{ user.username }}!</span>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-secondary btn-sm mx-1">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-sm mx-1 d-flex align-items-center justify-content-center" style="height: 40px; min-width: 80px;">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-success btn-sm mx-1 d-flex align-items-center justify-content-center" style="height: 40px; min-width: 80px;">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% load static %}

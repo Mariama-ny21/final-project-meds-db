@@ -1,3 +1,7 @@
+# Redirect to home after login
+LOGIN_REDIRECT_URL = '/'
+# Redirect to login after logout
+LOGOUT_REDIRECT_URL = '/login/'
 """
 Django settings for meds_finder project.
 
@@ -33,7 +37,6 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sample_uk_meds',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
+
+# Crispy Forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap4"]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

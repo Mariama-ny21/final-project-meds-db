@@ -1,0 +1,21 @@
+<h1>UK Medicines</h1>
+<form method="get">
+    <input type="text" name="q" placeholder="Search by name or formula" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if medicines %}
+    <ul>
+        {% for med in medicines %}
+            <li>
+                <strong>{{ med.medicine_name }}</strong> ({{ med.formula }})<br>
+                Dose: {{ med.dose }}<br>
+                Manufacturer: {{ med.manufacturer }}<br>
+                Price: £{{ med.price }}<br>
+                Rating: {{ med.rating }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No medicines found matching your search.</p>
+{% endif %}

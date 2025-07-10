@@ -3,6 +3,9 @@ from django.db import models
 
 # Create your models here.
 
+
+
+# Simplified Medicine model for flat CSV import (no BNF code, no FKs)
 class Medicine(models.Model):
     medicine_name = models.CharField(
         max_length=200,
@@ -10,7 +13,7 @@ class Medicine(models.Model):
     )
     formula = models.CharField(
         max_length=200,
-        help_text="Active ingredient/chemical formula"
+        help_text="Active ingredient or formula"
     )
     dose = models.CharField(
         max_length=200,
@@ -18,7 +21,7 @@ class Medicine(models.Model):
     )
     manufacturer = models.CharField(
         max_length=100,
-        help_text="Company that produces the medicine"
+        help_text="Manufacturer name"
     )
     price = models.DecimalField(
         max_digits=10,
@@ -27,6 +30,12 @@ class Medicine(models.Model):
     )
     rating = models.FloatField(
         help_text="Customer/clinical rating out of 5 (Demo only)"
+    )
+    emc_leaflet_url = models.URLField(
+        max_length=500,
+        blank=True,
+        null=True,
+        help_text="URL to the EMC patient leaflet for this medicine"
     )
 
     class Meta:
