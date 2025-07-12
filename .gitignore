@@ -12,3 +12,6 @@ venv/
 
 # Ignore environment variable files
 .env
+
+# Ignore Staticfiles
+staticfiles/

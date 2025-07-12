@@ -1,1 +1,1 @@
-web: gunicorn sample_uk_meds.wsgi
+web: gunicorn meds_finder.wsgi
