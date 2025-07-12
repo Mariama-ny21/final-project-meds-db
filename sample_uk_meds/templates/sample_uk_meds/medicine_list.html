@@ -18,6 +18,7 @@
                     <select name="sort" id="sort" class="form-select">
                         <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
                         <option value="formula" {% if sort == 'formula' %}selected{% endif %}>Formula</option>
+                        <option value="manufacturer" {% if sort == 'manufacturer' %}selected{% endif %}>Manufacturer</option>
                         <option value="price" {% if sort == 'price' %}selected{% endif %}>Price</option>
                         <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Rating</option>
                     </select>
@@ -50,6 +51,9 @@
             </div>
         </div>
     </div>
+    <div class="alert alert-info mb-4 d-inline-block" role="alert" style="font-size: 1.15rem;">
+        To see similar medicines, click the medicine name.
+    </div>
     {% if medicines %}
         <div class="row g-4">
             {% for med in medicines %}
@@ -65,6 +69,10 @@
                         {% if med.emc_leaflet_url %}
                         <a href="{{ med.emc_leaflet_url }}" target="_blank" class="btn btn-success btn-sm mt-2">Patient Leaflet (EMC)</a>
                         {% endif %}
+                       <form action="{% url 'add_to_cart' med.pk %}" method="post" style="margin-top: 1em;">
+                           {% csrf_token %}
+                           <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                       </form>
                     </div>
                 </div>
             </div>

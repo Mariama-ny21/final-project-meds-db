@@ -39,8 +39,4 @@ class MedicineAdmin(admin.ModelAdmin):
         ('Commercial Details', {
             'fields': ('manufacturer', 'price', 'rating', 'emc_leaflet_url')
         }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
     )

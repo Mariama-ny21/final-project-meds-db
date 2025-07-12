@@ -1,0 +1,52 @@
+BNF Codes [Post cleaning and then Restored so may contain errors) 
+bnf_code,formula,dose,manufacturer_name,price,brand_name,generic_available
+0209000A0,Acetylsalicylic Acid,75mg gastro-resistant tablets (28 pack),Bayer,2.50,Aspirin,True
+0209000A0AA,Acetylsalicylic Acid,75mg gastro-resistant tablets (28 pack),Teva,1.80,Aspirin,True
+0407010B0,Acetylsalicylic Acid,300mg dispersible tablets (32 pack),GlaxoSmithKline,3.20,Aspirin,True
+0407010B0AA,Acetylsalicylic Acid,300mg dispersible tablets (32 pack),Generic Manufacturer,1.20,Aspirin,True
+0407010B0AABCBC,Acetylsalicylic Acid,150mg suppositories (10 pack),Reckitt Benckiser,4.50,Aspirin Suppositories,False
+0407010H0,Paracetamol,500mg tablets (32 pack),Pfizer,5.80,Paracetamol,True
+0407010H0AA,Paracetamol,500mg tablets (32 pack),Teva,2.30,Paracetamol,True
+0407010H0AAAAAA,Paracetamol,500mg tablets (32 pack),GlaxoSmithKline,3.90,Paracetamol,True
+1001010C0,Ibuprofen,400mg coated tablets (24 pack),Nurofen,6.20,Nurofen,False
+1001010C0AA,Ibuprofen,400mg coated tablets (24 pack),Generic Manufacturer,2.80,Ibuprofen,True
+1001010C0AAAAAA,Ibuprofen,400mg coated tablets (24 pack),Boots,4.10,Ibuprofen,True
+0301011A0,Chlorphenamine Maleate,4mg tablets (28 pack),GlaxoSmithKline,4.50,Piriton,False
+0301011A0AA,Chlorphenamine Maleate,4mg tablets (28 pack),Generic Manufacturer,2.20,Chlorphenamine,True
+0301011B0,Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),UCB Pharma,8.90,Cetirizine,True
+0301011B0AA,Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),Teva,3.50,Cetirizine,True
+0301011B0AAAAAA,Cetirizine Hydrochloride,10mg film-coated tablets (30 pack),Benadryl,5.20,Benadryl,True
+0301011C0,Loratadine,10mg film-coated tablets (30 pack),Merck,12.80,Loratadine,True
+0301011C0AA,Loratadine,10mg film-coated tablets (30 pack),Generic Manufacturer,4.80,Loratadine,True
+0301011C0AAAAAA,Loratadine,10mg film-coated tablets (30 pack),Clarityn,9.60,Clarityn,False
+0103050E0,Omeprazole,20mg gastro-resistant capsules (28 pack),AstraZeneca,28.50,Omeprazole,True
+0103050E0AA,Omeprazole,20mg gastro-resistant capsules (28 pack),Teva,15.20,Omeprazole,True
+0103050E0AAAAAA,Omeprazole,20mg gastro-resistant capsules (28 pack),Losec,35.80,Losec,False
+1304010A0,Hydrocortisone,1% cream (15g tube),Pfizer,8.90,Hydrocortisone,True
+1304010A0AA,Hydrocortisone,1% cream (15g tube),Generic Manufacturer,4.50,Hydrocortisone,True
+1304010A0AAAAAA,Hydrocortisone,1% cream (15g tube),Dermacort,7.20,Dermacort,True
+1304020B0,Clobetasone Butyrate,0.05% cream (30g tube),GlaxoSmithKline,18.50,Eumovate,False
+1304020B0AA,Clobetasone Butyrate,0.05% cream (30g tube),Teva,12.80,Clobetasone,True
+0301050A0,Dextromethorphan,15mg/5ml oral solution (125ml bottle),Johnson & Johnson,6.80,Benylin,False
+0301050A0AA,Dextromethorphan,15mg/5ml oral solution (125ml bottle),Generic Manufacturer,3.20,Dextromethorphan,True
+0301050B0,Pholcodine,5mg/5ml linctus (200ml bottle),Novartis,5.90,Tixylix,False
+0301050B0AA,Pholcodine,5mg/5ml linctus (200ml bottle),Generic Manufacturer,2.80,Pholcodine,True
+0601023A0,Metformin Hydrochloride,500mg film-coated tablets (84 pack),Teva,8.90,Metformin,True
+0601023A0AA,Metformin Hydrochloride,500mg film-coated tablets (84 pack),Accord,7.50,Metformin,True
+0601023A0AAAAAA,Metformin Hydrochloride,500mg film-coated tablets (84 pack),Glucophage,12.40,Glucophage,False
+0501013A0,Amoxicillin,500mg capsules (21 pack),GlaxoSmithKline,18.70,Amoxicillin,True
+0501013A0AA,Amoxicillin,500mg capsules (21 pack),Sandoz,12.30,Amoxicillin,True
+0501013A0AAAAAA,Amoxicillin,500mg capsules (21 pack),Amoxil,22.60,Amoxil,False
+0212000B0,Simvastatin,40mg film-coated tablets (28 pack),Pfizer,12.40,Simvastatin,True
+0212000B0AA,Simvastatin,40mg film-coated tablets (28 pack),Teva,6.80,Simvastatin,True
+0212000B0AAAAAA,Simvastatin,40mg film-coated tablets (28 pack),Zocor,18.90,Zocor,False
+0212000Y0,Atorvastatin,20mg film-coated tablets (28 pack),Pfizer,25.60,Atorvastatin,True
+0212000Y0AA,Atorvastatin,20mg film-coated tablets (28 pack),Accord,12.80,Atorvastatin,True
+0212000Y0AAAAAA,Atorvastatin,20mg film-coated tablets (28 pack),Lipitor,35.20,Lipitor,False
+0407010H0BBBBBB,Paracetamol,250mg/5ml oral suspension (100ml bottle),Johnson & Johnson,4.80,Calpol,False
+0407010H0CCCCCC,Paracetamol,500mg/5ml oral suspension (200ml bottle),Generic Manufacturer,6.20,Paracetamol,True
+1001010C0BBBBBB,Ibuprofen,100mg/5ml oral suspension (100ml bottle),Nurofen,8.40,Nurofen For Children,False
+1001010C0CCCCCC,Ibuprofen,200mg capsules (30 pack),Boots,5.60,Ibuprofen,True
+0301011B0BBBBBB,Cetirizine Hydrochloride,1mg/ml oral solution (200ml bottle),UCB Pharma,12.50,Cetirizine,True
+0103050E0BBBBBB,Omeprazole,10mg/ml oral suspension (30ml bottle),AstraZeneca,45.80,Omeprazole,True
+0601023A0BBBBBB,Metformin Hydrochloride,850mg film-coated tablets (56 pack),Teva,11.90,Metformin,True

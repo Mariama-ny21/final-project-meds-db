@@ -1,0 +1,26 @@
+Stripe Test Card Payments
+========================
+
+Use these details to test the Stripe payment flow in Test Mode. No real money will be charged. Any valid future expiry date and any CVC will work. Use any email address (e.g., email@example.com).
+
+-----------------------------
+1. Test User
+-----------------------------
+Cardholder Name: Test User
+Card Number: 4242 4242 4242 4242
+Expiry: 12/30 (any future MM/YY)
+CVC: 123 (any 3 digits)
+Postcode: SW1A 1AA (any valid UK postcode)
+Email: email@example.com
+
+-----------------------------
+2. Jane Doe
+-----------------------------
+Cardholder Name: Jane Doe
+Card Number: 4000 0566 5566 5556
+Expiry: 12/30 (any future MM/YY)
+CVC: 123 (any 3 digits)
+Postcode: EC1A 1BB (any valid UK postcode)
+Email: email@example.com
+
+For more test cards and scenarios, see: https://stripe.com/docs/testing#international-cards
