@@ -19,10 +19,14 @@ import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from .env (for local development)
 load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+print("DATABASE_URL:", os.getenv("DATABASE_URL"))
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -90,12 +94,13 @@ WSGI_APPLICATION = 'meds_finder.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=False  # For local; set to True on Heroku
+    )
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
