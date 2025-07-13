@@ -1,8 +1,10 @@
+
 from django.test import TestCase
 from .models import Medicine
 from django.urls import reverse
 
-# Medicines Search/Sort Tests
+ # Medicines Search/Sort Tests
+
 class MedicineSearchTests(TestCase):
     def setUp(self):
         self.aspirin = Medicine.objects.create(
@@ -87,27 +89,46 @@ class SimilarMedicinesTests(TestCase):
         self.assertContains(response, "Ibuprofen (Generic)")
         self.assertNotContains(response, "Paracetamol")
         # Should not list itself as similar
-        self.assertNotContains(response, '<a href="/medicines/{}/">Ibuprofen</a>'.format(self.main.pk))
+        self.assertNotContains(
+            response,
+            '<a href="/medicines/{}/">Ibuprofen</a>'.format(self.main.pk)
+        )
 
     def test_no_similar_medicines(self):
         response = self.client.get(f'/medicines/{self.other.pk}/')
         self.assertContains(response, "No similar medicines found.")
  
+  
+
 class MedicineSortFilterTests(TestCase):
     def setUp(self):
-        Medicine.objects.create(medicine_name="AlphaMed", formula="F", dose="D", manufacturer="M", price=2.0, rating=3.0)
-        Medicine.objects.create(medicine_name="BetaMed", formula="F", dose="D", manufacturer="M", price=1.0, rating=5.0)
-        Medicine.objects.create(medicine_name="GammaMed", formula="F", dose="D", manufacturer="M", price=3.0, rating=4.0)
+        Medicine.objects.create(
+            medicine_name="AlphaMed", formula="F", dose="D", manufacturer="M",
+            price=2.0, rating=3.0
+        )
+        Medicine.objects.create(
+            medicine_name="BetaMed", formula="F", dose="D", manufacturer="M",
+            price=1.0, rating=5.0
+        )
+        Medicine.objects.create(
+            medicine_name="GammaMed", formula="F", dose="D", manufacturer="M",
+            price=3.0, rating=4.0
+        )
 
     def test_sort_by_price_asc(self):
         response = self.client.get('/medicines/?sort=price&order=asc')
         content = response.content.decode()
-        self.assertTrue(content.index("BetaMed") < content.index("AlphaMed") < content.index("GammaMed"))
+        self.assertTrue(
+            content.index("BetaMed") < content.index("AlphaMed") < content.index("GammaMed")
+        )
 
     def test_sort_by_price_desc(self):
         response = self.client.get('/medicines/?sort=price&order=desc')
         content = response.content.decode()
-        self.assertTrue(content.index("GammaMed") < content.index("AlphaMed") < content.index("BetaMed"))
+        self.assertTrue(
+            content.index("GammaMed") < content.index("AlphaMed") and
+            content.index("AlphaMed") < content.index("BetaMed")
+        )
 
     def test_filter_by_rating(self):
         response = self.client.get('/medicines/?rating=5')
@@ -118,15 +139,22 @@ class MedicineSortFilterTests(TestCase):
     def test_filter_by_rating_and_sort(self):
         response = self.client.get('/medicines/?rating=4&sort=price&order=asc')
         content = response.content.decode()
-        # Only BetaMed and GammaMed should be present, BetaMed (1.0) before GammaMed (3.0)
+        # Only BetaMed and GammaMed should be present,
+        # BetaMed (1.0) before GammaMed (3.0)
         self.assertTrue(content.index("BetaMed") < content.index("GammaMed"))
         self.assertNotIn("AlphaMed", content)
 
     def test_no_results(self):
         response = self.client.get('/medicines/?rating=6')
-        self.assertContains(response, "No medicines found matching your search and filters.")
+        self.assertContains(
+            response,
+            "No medicines found matching your search and filters."
+        )
 
+  
 # --- Cart and Checkout View Tests ---
+# --- Cart and Checkout View Tests ---
+
 class CartViewTests(TestCase):
     def setUp(self):
         self.med1 = Medicine.objects.create(
@@ -158,7 +186,9 @@ class CartViewTests(TestCase):
     def test_remove_from_cart(self):
         # Add and then remove
         self.client.get(reverse('add_to_cart', args=[self.med2.pk]))
-        response = self.client.get(reverse('remove_from_cart', args=[self.med2.pk]))
+        response = self.client.get(
+            reverse('remove_from_cart', args=[self.med2.pk])
+        )
         self.assertEqual(response.status_code, 302)
         response = self.client.get(reverse('view_cart'))
         self.assertNotContains(response, "TestMed2")
