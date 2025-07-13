@@ -1,4 +1,17 @@
+/* Main green text utility class for consistent color */
+.main-green-text {
+    color: #198754 !important;
+}
 /* Custom styles for UK Medicines Finder */
+
+.about-section {
+    line-height: 1.7;
+}
+.about-section p {
+    margin-bottom: 1em;
+    color: #198754;
+    font-size: 1.25rem;
+}
 
 .main-navy-heading {
     color: #0d6efd !important;
