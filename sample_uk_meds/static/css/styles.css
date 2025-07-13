@@ -9,8 +9,13 @@
 }
 .about-section p {
     margin-bottom: 1em;
-    color: #198754;
-    font-size: 1.25rem;
+    color: #198754 !important;
+    font-size: 1.5rem;
+}
+
+.main-green-text {
+    color: #198754 !important;
+    font-size: 1.5rem;
 }
 
 .main-navy-heading {
