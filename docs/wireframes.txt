@@ -1,0 +1,97 @@
+# Wireframes for Comparative Medicines Database
+
+Below are simple wireframe diagrams for the main user flows/pages in the app. You can use these as image references or as a starting point for digital wireframes in Figma, Balsamiq, or Excalidraw.
+
+---
+
+## Home Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+|                                                   |
+|   Welcome message / App description               |
+|                                                   |
+|   [Search bar:  ____________________  (Search)]   |
+|                                                   |
+|   [Browse Medicines] [About] [Contact]            |
+|                                                   |
++---------------------------------------------------+
+
+---
+
+## Medicine List Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+| [Search bar] [Filter] [Sort]                      |
+|---------------------------------------------------|
+| Name      | Formula   | Price | Rating | [Add]    |
+|---------------------------------------------------|
+| Paracetamol | ...     | £1.99 | ★★★★☆ | [Add]    |
+| Ibuprofen   | ...     | £2.49 | ★★★☆☆ | [Add]    |
+| ...                                           ... |
++---------------------------------------------------+
+
+---
+
+## Medicine Detail Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+| Medicine Name                                     |
+| Formula: ...                                      |
+| Manufacturer: ...                                 |
+| Price: £...    Rating: ...                        |
+| [EMC Leaflet Link]                                |
+| [Add to Cart] [Buy Now]                           |
+|---------------------------------------------------|
+| Similar Medicines:                                |
+| - ...                                             |
++---------------------------------------------------+
+
+---
+
+## Cart Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+| Item         | Qty | Price | Subtotal | [Remove]  |
+|---------------------------------------------------|
+| Paracetamol  |  2  | £1.99 | £3.98   | [Remove]  |
+| ...                                           ... |
+|---------------------------------------------------|
+| Total: £...                                     |
+| [Continue Shopping] [Proceed to Checkout]         |
++---------------------------------------------------+
+
+---
+
+## Checkout Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+| Stripe Payment Form (Test Mode)                   |
+| [Pay Now]                                        |
++---------------------------------------------------+
+
+---
+
+## Login/Register Page
+
++---------------------------------------------------+
+| [Logo]   [Medicines]   [Cart]   [Login/Logout]    |
++---------------------------------------------------+
+| [Login Form]   or   [Register Form]               |
++---------------------------------------------------+
+
+---
+
+# How to use
+- You can copy these diagrams into your README or `/docs` folder.
+- For a more visual look, recreate them in Figma, Balsamiq, Excalidraw, or Canva.
+- Add screenshots of your actual UI below each wireframe to show the final implementation.

@@ -1,12 +1,21 @@
+
+"""
+models.py
+---------
+Defines database models for medicines, orders, and order items.
+Each model represents a table in the database and uses Django's ORM for data management.
+"""
+
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
 
 
-
-# Simplified Medicine model for flat CSV import (no BNF code, no FKs)
 class Medicine(models.Model):
+    """
+    Represents a medicine available in the system.
+    Fields include name, formula, dose, manufacturer, price, rating, and EMC leaflet URL.
+    """
     medicine_name = models.CharField(
         max_length=200,
         help_text="Commercial name of the medicine"
@@ -67,6 +76,10 @@ ORDER_STATUS_CHOICES = [
 
 
 class Order(models.Model):
+    """
+    Represents a user's order, containing one or more order items.
+    Tracks user, status, and order date.
+    """
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -85,6 +98,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    """
+    Represents a single item in an order, linking a medicine to an order with a quantity.
+    """
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,

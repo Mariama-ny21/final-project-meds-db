@@ -1,3 +1,11 @@
+
+"""
+views.py
+--------
+Contains all view functions for the sample_uk_meds app, including CRUD for medicines,
+user registration, cart management, and Stripe payment integration.
+"""
+
 from django.urls import reverse
 from .models import Medicine
 from django import forms
@@ -10,6 +18,7 @@ class MedicineForm(forms.ModelForm):
 
 # CREATE
 def medicine_create(request):
+    """Create a new medicine entry via a form."""
     if request.method == 'POST':
         form = MedicineForm(request.POST)
         if form.is_valid():
@@ -21,6 +30,7 @@ def medicine_create(request):
 
 # UPDATE
 def medicine_update(request, pk):
+    """Update an existing medicine entry by primary key."""
     medicine = get_object_or_404(Medicine, pk=pk)
     if request.method == 'POST':
         form = MedicineForm(request.POST, instance=medicine)
@@ -33,6 +43,7 @@ def medicine_update(request, pk):
 
 # DELETE
 def medicine_delete(request, pk):
+    """Delete a medicine entry by primary key after confirmation."""
     medicine = get_object_or_404(Medicine, pk=pk)
     if request.method == 'POST':
         medicine.delete()
@@ -56,6 +67,7 @@ class CustomUserCreationForm(UserCreationForm):
         }
 
 def register(request):
+    """Register a new user using a custom user creation form."""
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -76,6 +88,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 
 def buy_medicine(request, pk):
+    """Start a Stripe checkout session for a single medicine purchase."""
     medicine = get_object_or_404(Medicine, pk=pk)
     price_str = str(medicine.price).replace('£', '').strip()
     try:
@@ -103,16 +116,19 @@ def buy_medicine(request, pk):
     return redirect(session.url, code=303)
 
 def payment_success(request):
+    """Render the payment success page after Stripe checkout."""
     return render(request, 'sample_uk_meds/payment_success.html')
 
 
 # Create your views here.
 
 def home(request):
+    """Render the home page."""
     return render(request, 'sample_uk_meds/home.html')
 
 
 def medicine_list(request):
+    """Display a list of medicines with search, filter, and sort options."""
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', 'name')
     order = request.GET.get('order', 'asc')
@@ -163,6 +179,7 @@ def medicine_list(request):
 
 
 def medicine_detail(request, pk):
+    """Show details for a single medicine and up to 5 similar medicines."""
     medicine = get_object_or_404(Medicine, pk=pk)
     # Find up to 5 similar medicines by formula or medicine name (excluding the current one)
     similar_meds = (
@@ -187,12 +204,14 @@ def medicine_detail(request, pk):
 from django.http import JsonResponse
 
 def add_to_cart(request, pk):
+    """Add a medicine to the session-based cart."""
     cart = request.session.get('cart', {})
     cart[str(pk)] = cart.get(str(pk), 0) + 1
     request.session['cart'] = cart
     return redirect('view_cart')
 
 def view_cart(request):
+    """Display the contents of the cart and the total price."""
     cart = request.session.get('cart', {})
     medicines = []
     total = 0
@@ -208,6 +227,7 @@ def view_cart(request):
     return render(request, 'sample_uk_meds/cart.html', {'cart_items': medicines, 'total': total})
 
 def remove_from_cart(request, pk):
+    """Remove a medicine from the session-based cart."""
     cart = request.session.get('cart', {})
     if str(pk) in cart:
         del cart[str(pk)]
@@ -220,6 +240,7 @@ import stripe
 from django.conf import settings
 
 def cart_checkout(request):
+    """Start a Stripe checkout session for all items in the cart."""
     cart = request.session.get('cart', {})
     if not cart:
         return redirect('view_cart')
