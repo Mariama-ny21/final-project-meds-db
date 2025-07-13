@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Your Shopping Cart</h2>
+    <h2 id="cart-heading">Your Shopping Cart</h2>
     {% if cart_items %}
-        <table class="table table-bordered table-striped mt-3">
+    <div class="cart-table-responsive" role="region" aria-labelledby="cart-heading" tabindex="0">
+        <table class="table table-bordered table-striped mt-3" role="table">
             <thead>
                 <tr>
-                    <th>Medicine</th>
-                    <th>Formula</th>
-                    <th>Manufacturer</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                    <th>Remove</th>
+                    <th scope="col">Medicine</th>
+                    <th scope="col">Formula</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Remove</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +32,9 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="text-end">
+    </div>
+        <div class="text-end cart-total-actions">
             <h4>Total: £{{ total|floatformat:2 }}</h4>
-            <!-- You can add a checkout button here -->
             <a href="{% url 'cart_checkout' %}" class="btn btn-success">Proceed to Checkout</a>
         </div>
     {% else %}

@@ -1,0 +1,60 @@
+/* Custom styles for UK Medicines Finder */
+
+.main-navy-heading {
+    color: #0d6efd !important;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 1px 2px 8px rgba(13,110,253,0.08), 0 1px 0 #fff;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+.main-navy-heading .headline-underline {
+    border-bottom: 4px solid #0d6efd;
+    padding-bottom: 2px;
+    color: #0d6efd !important;
+}
+
+/* Medicine detail page custom styles */
+.medicine-detail-container {
+    max-width: 700px;
+}
+.emc-leaflet-box {
+    background: #fffbe6;
+    border: 2px solid #ffe066;
+    border-radius: 6px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+}
+.emc-leaflet-link {
+    font-weight: bold;
+    color: #0074D9;
+    text-decoration: underline;
+}
+.emc-leaflet-info {
+    cursor: help;
+    margin-left: 0.7em;
+    font-size: 1.3em;
+    color: #ff9900;
+    vertical-align: middle;
+}
+.emc-leaflet-note {
+    margin-top: 8px;
+    font-size: 1em;
+    color: #b36b00;
+    background: #fff3cd;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+/* Cart page responsive table */
+.cart-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1.5rem;
+}
+.cart-table-responsive table {
+    min-width: 700px;
+}
+.cart-total-actions {
+    margin-bottom: 1.5rem;
+}

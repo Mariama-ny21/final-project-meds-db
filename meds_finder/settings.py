@@ -25,9 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load environment variables from .env (for local development)
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-print("DATABASE_URL:", os.getenv("DATABASE_URL"))
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -36,7 +33,7 @@ print("DATABASE_URL:", os.getenv("DATABASE_URL"))
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django-project-sample-uk-meds.herokuapp.com', '.herokuapp.com',]
 
@@ -82,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sample_uk_meds.context_processors.cart_count',
             ],
         },
     },
