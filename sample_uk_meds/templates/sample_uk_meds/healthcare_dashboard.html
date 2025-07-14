@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 text-primary">Healthcare Professional Dashboard</h2>
+    <div class="alert alert-info">
+        <strong>Welcome, {{ user.username }}!</strong> This area is only accessible to verified healthcare professionals.
+    </div>
+    <h4 class="mt-4 mb-3">Medicine Analytics</h4>
+    <ul class="list-group mb-4">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Total Medicines</span>
+            <span class="fw-bold">{{ total_meds }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Average Price</span>
+            <span class="fw-bold">£{{ avg_price|floatformat:2 }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Lowest Price</span>
+            <span class="fw-bold">£{{ min_price|floatformat:2 }} <span class="text-muted">({{ min_price_medicine }})</span></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Highest Price</span>
+            <span class="fw-bold">£{{ max_price|floatformat:2 }} <span class="text-muted">({{ max_price_medicine }})</span></span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Average Rating</span>
+            <span class="fw-bold">{{ avg_rating|floatformat:2 }} / 5</span>
+        </li>
+    </ul>
+
+    <div class="row mb-4">
+        <div class="col-md-6" id="manufacturerBarChartArea">
+            <h5 class="mb-2">Top 3 Manufacturers (by number of medicines)</h5>
+            <canvas id="manufacturerBarChart" height="200"></canvas>
+        </div>
+        <div class="col-md-6" id="ratingsPieChartArea">
+            <h5 class="mb-2">Ratings Distribution</h5>
+            <canvas id="ratingsPieChart" height="200"></canvas>
+        </div>
+    </div>
+
+    <ol class="list-group list-group-numbered mb-4">
+        {% for m in top_manufacturers %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ m.manufacturer }}</span>
+                <span class="badge bg-primary rounded-pill">{{ m.count }}</span>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No manufacturer data available.</li>
+        {% endfor %}
+    </ol>
+    <div class="alert alert-info mt-4">
+        <strong>Tip:</strong> Use this dashboard to quickly review medicine trends and pricing in the medicines database.
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar chart for top manufacturers
+        const manufacturerLabels = JSON.parse('{{ manufacturer_labels|escapejs }}');
+        const manufacturerCounts = JSON.parse('{{ manufacturer_counts|escapejs }}');
+        const ratingsLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+        const ratingsCounts = JSON.parse('{{ ratings_distribution|escapejs }}');
+
+        new Chart(document.getElementById('manufacturerBarChart'), {
+            type: 'bar',
+            data: {
+                labels: manufacturerLabels,
+                datasets: [{
+                    label: 'Number of Medicines',
+                    data: manufacturerCounts,
+                    backgroundColor: ['#0d6efd', '#198754', '#ffc107'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, precision: 0 } }
+            }
+        });
+
+        // Pie chart for ratings distribution
+        new Chart(document.getElementById('ratingsPieChart'), {
+            type: 'pie',
+            data: {
+                labels: ratingsLabels,
+                datasets: [{
+                    data: ratingsCounts,
+                    backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#198754', '#0d6efd'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+{% endblock %}

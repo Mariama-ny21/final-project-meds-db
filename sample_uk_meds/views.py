@@ -1,4 +1,73 @@
 
+from django.contrib.auth.decorators import login_required
+from .models_profile import UserProfile
+from .models import Medicine
+from django.db.models import Avg, Count
+
+# Decorator to restrict view to healthcare professionals
+def healthcare_professional_required(view_func):
+    @login_required
+    def _wrapped_view(request, *args, **kwargs):
+        try:
+            profile = UserProfile.objects.get(user=request.user)
+            if profile.is_healthcare_professional:
+                return view_func(request, *args, **kwargs)
+        except UserProfile.DoesNotExist:
+            pass
+        from django.http import HttpResponseForbidden
+        return HttpResponseForbidden("You do not have permission to access this page.")
+    return _wrapped_view
+
+# Healthcare Dashboard view with analytics
+@healthcare_professional_required
+def healthcare_dashboard(request):
+    total_meds = Medicine.objects.count()
+    agg = Medicine.objects.aggregate(
+        avg=Avg('price'),
+        min_price=models.Min('price'),
+        max_price=models.Max('price'),
+        avg_rating=Avg('rating')
+    )
+    avg_price = agg['avg']
+    min_price = agg['min_price']
+    max_price = agg['max_price']
+    avg_rating = agg['avg_rating']
+    top_manufacturers = (
+        Medicine.objects.values('manufacturer')
+        .annotate(count=Count('id'))
+        .order_by('-count')[:3]
+    )
+    # For Chart.js: labels and counts for top manufacturers
+    manufacturer_labels = [m['manufacturer'] for m in top_manufacturers]
+    manufacturer_counts = [m['count'] for m in top_manufacturers]
+
+    # Find medicine names for min and max price
+    min_price_medicine = Medicine.objects.filter(price=min_price).first()
+    max_price_medicine = Medicine.objects.filter(price=max_price).first()
+    min_price_medicine_name = min_price_medicine.medicine_name if min_price_medicine else 'N/A'
+    max_price_medicine_name = max_price_medicine.medicine_name if max_price_medicine else 'N/A'
+
+    # Ratings distribution (1-5 stars)
+    ratings_distribution = [
+        Medicine.objects.filter(rating__gte=i, rating__lt=i+1).count() for i in range(1, 5)
+    ]
+    ratings_distribution.append(Medicine.objects.filter(rating=5).count())
+
+    import json
+    return render(request, 'sample_uk_meds/healthcare_dashboard.html', {
+        'total_meds': total_meds,
+        'avg_price': avg_price,
+        'min_price': min_price,
+        'max_price': max_price,
+        'avg_rating': avg_rating,
+        'top_manufacturers': top_manufacturers,
+        'manufacturer_labels': json.dumps(manufacturer_labels),
+        'manufacturer_counts': json.dumps(manufacturer_counts),
+        'min_price_medicine': min_price_medicine_name,
+        'max_price_medicine': max_price_medicine_name,
+        'ratings_distribution': json.dumps(ratings_distribution),
+    })
+
 """
 views.py
 --------
@@ -52,13 +121,20 @@ def medicine_delete(request, pk):
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from .models_profile import UserProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
 
 # Custom UserCreationForm to remove username help text
+
+from django import forms as djforms
 class CustomUserCreationForm(UserCreationForm):
+    is_healthcare_professional = djforms.BooleanField(
+        required=False,
+        label="I am a healthcare professional"
+    )
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields
@@ -67,11 +143,13 @@ class CustomUserCreationForm(UserCreationForm):
         }
 
 def register(request):
-    """Register a new user using a custom user creation form."""
+    """Register a new user using a custom user creation form, with role."""
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            is_hp = form.cleaned_data.get('is_healthcare_professional', False)
+            UserProfile.objects.create(user=user, is_healthcare_professional=is_hp)
             messages.success(request, 'Account created successfully! You can now log in.')
             return redirect('login')
     else:

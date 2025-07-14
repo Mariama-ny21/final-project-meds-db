@@ -20,5 +20,8 @@ urlpatterns = [
     path('cart/add/<int:pk>/', views.add_to_cart, name='add_to_cart'),
     path('cart/remove/<int:pk>/', views.remove_from_cart, name='remove_from_cart'),
     path('cart/checkout/', views.cart_checkout, name='cart_checkout'),
+
+    # Healthcare professional dashboard
+    path('healthcare-dashboard/', views.healthcare_dashboard, name='healthcare_dashboard'),
 ]
 

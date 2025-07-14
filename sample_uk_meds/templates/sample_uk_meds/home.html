@@ -44,19 +44,25 @@
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <span class="navbar-text text-white me-2">Welcome, {{ user.username }}!</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-light btn-sm ms-1" href="{% url 'logout' %}">Logout</a>
-                    </li>
+                        {# Show Healthcare Dashboard link if user is a healthcare professional, handle missing profile gracefully #}
+                        {% if user.userprofile and user.userprofile.is_healthcare_professional %}
+                            <li class="nav-item">
+                                <a class="nav-link text-warning fw-bold" href="{% url 'healthcare_dashboard' %}">Healthcare Dashboard</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <span class="navbar-text text-white me-2">Welcome, {{ user.username }}!</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm ms-1" href="{% url 'logout' %}">Logout</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item">
-                        <a class="btn btn-light btn-sm ms-1" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-success btn-sm ms-1" href="{% url 'register' %}">Sign Up</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="btn btn-light btn-sm ms-1" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-success btn-sm ms-1" href="{% url 'register' %}">Sign Up</a>
+                        </li>
                     {% endif %}
                 </ul>
             </div>
