@@ -46,6 +46,11 @@ class Medicine(models.Model):
         null=True,
         help_text="URL to the EMC patient leaflet for this medicine"
     )
+    common_usage = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text="Short summary of what the medicine is commonly used for (e.g. headache, cold & flu)"
+    )
 
     class Meta:
         ordering = ['medicine_name']

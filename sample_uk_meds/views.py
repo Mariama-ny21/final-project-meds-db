@@ -83,7 +83,7 @@ from django import forms
 class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
-        fields = ['medicine_name', 'formula', 'dose', 'manufacturer', 'price', 'rating', 'emc_leaflet_url']
+        fields = ['medicine_name', 'formula', 'dose', 'manufacturer', 'price', 'rating', 'emc_leaflet_url', 'common_usage']
 
 # CREATE
 def medicine_create(request):
