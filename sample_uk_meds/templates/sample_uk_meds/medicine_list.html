@@ -21,16 +21,24 @@
     <div class="alert alert-info mb-4 d-inline-block" role="alert" style="font-size: 1.15rem;">
         To see similar medicines, click the medicine name.
     </div>
-    {% if medicines %}
-        <div class="row g-4">
-            {% for med in medicines %}
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                        <h3 class="card-title"><a href="{% url 'medicine_detail' med.pk %}" class="link-primary text-decoration-none">{{ med.medicine_name }}</a></h3>
-                        <h6 class="card-subtitle mb-2 text-muted">({{ med.formula }})</h6>
-                        <p class="mb-1"><strong>Dose:</strong> {{ med.dose }}</p>
-                        <p class="mb-1"><strong>Manufacturer:</strong> {{ med.manufacturer }}</p>
-                        <p class="mb-1"><strong>Price:</strong> £{{ med.price }}</p>
-                        <p class="mb-1"><strong>Rating:</strong> {{ med.rating }}</p>
-                        {% if med.emc_leaflet_url %}
+   {% if medicines %}
+    <div class="row g-4">
+        {% for med in medicines %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title"><a href="{% url 'medicine_detail' med.pk %}" class="link-primary text-decoration-none">{{ med.medicine_name }}</a></h3>
+                    <h6 class="card-subtitle mb-2 text-muted">({{ med.formula }})</h6>
+                    <p class="mb-1"><strong>Dose:</strong> {{ med.dose }}</p>
+                    <p class="mb-1"><strong>Manufacturer:</strong> {{ med.manufacturer }}</p>
+                    <p class="mb-1"><strong>Price:</strong> £{{ med.price }}</p>
+                    <p class="mb-1"><strong>Rating:</strong> {{ med.rating }}</p>
+                    {% if med.emc_leaflet_url %}
+                        <p class="mb-1"><strong>EMC Leaflet:</strong> <a href="{{ med.emc_leaflet_url }}" target="_blank" rel="noopener" class="link-info">View leaflet</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
