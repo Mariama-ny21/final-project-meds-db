@@ -34,7 +34,7 @@
         </table>
     </div>
         <div class="text-end cart-total-actions">
-            <h4>Total: £{{ total|floatformat:2 }}</h4>
+            <h2>Total: £{{ total|floatformat:2 }}</h2>
             <a href="{% url 'cart_checkout' %}" class="btn btn-success">Proceed to Checkout</a>
         </div>
     {% else %}

@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Medicines List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container py-4">
-    <div class="row mb-3">
-        <div class="col-md-8">
-            <h1 class="mb-3">Medicines List</h1>
-            <form method="get" class="row g-2 align-items-end mb-3">
-                <div class="col-md-4">
-                    <input type="text" class="form-control" name="q" placeholder="Search by name or formula" value="{{ query }}">
-                </div>
-                <div class="col-md-2">
-                    <label for="sort" class="form-label mb-0">Sort by:</label>
-                    <select name="sort" id="sort" class="form-select">
-                        <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
-                        <option value="formula" {% if sort == 'formula' %}selected{% endif %}>Formula</option>
-                        <option value="manufacturer" {% if sort == 'manufacturer' %}selected{% endif %}>Manufacturer</option>
-                        <option value="price" {% if sort == 'price' %}selected{% endif %}>Price</option>
-                        <option value="rating" {% if sort == 'rating' %}selected{% endif %}>Rating</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="order" class="form-label mb-0">Order:</label>
-                    <select name="order" id="order" class="form-select">
-                        <option value="asc" {% if order == 'asc' %}selected{% endif %}>Ascending</option>
-                        <option value="desc" {% if order == 'desc' %}selected{% endif %}>Descending</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="rating" class="form-label mb-0">Min. Rating:</label>
+<label for="rating" class="form-label mb-0">Min. Rating:</label>
                     <select name="rating" id="rating" class="form-select">
                         <option value="" {% if not rating_filter %}selected{% endif %}>Any</option>
                         <option value="5" {% if rating_filter == '5' %}selected{% endif %}>5 stars</option>
@@ -60,29 +27,10 @@
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'medicine_detail' med.pk %}" class="link-primary text-decoration-none">{{ med.medicine_name }}</a></h5>
+                        <h3 class="card-title"><a href="{% url 'medicine_detail' med.pk %}" class="link-primary text-decoration-none">{{ med.medicine_name }}</a></h3>
                         <h6 class="card-subtitle mb-2 text-muted">({{ med.formula }})</h6>
                         <p class="mb-1"><strong>Dose:</strong> {{ med.dose }}</p>
                         <p class="mb-1"><strong>Manufacturer:</strong> {{ med.manufacturer }}</p>
                         <p class="mb-1"><strong>Price:</strong> £{{ med.price }}</p>
                         <p class="mb-1"><strong>Rating:</strong> {{ med.rating }}</p>
                         {% if med.emc_leaflet_url %}
-                        <a href="{{ med.emc_leaflet_url }}" target="_blank" class="btn btn-success btn-sm mt-2">Patient Leaflet (EMC)</a>
-                        {% endif %}
-                       <form action="{% url 'add_to_cart' med.pk %}" method="post" style="margin-top: 1em;">
-                           {% csrf_token %}
-                           <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
-                       </form>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="alert alert-warning mt-4">No medicines found matching your search and filters.</div>
-    {% endif %}
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-{% load static %}

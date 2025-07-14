@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container py-5">
+<div class="container pt-3 pb-5">
     <h2 class="mb-4 text-primary">Healthcare Professional Dashboard</h2>
     <div class="alert alert-info">
         <strong>Welcome, {{ user.username }}!</strong> This area is only accessible to verified healthcare professionals.
     </div>
-    <h4 class="mt-4 mb-3">Medicine Analytics</h4>
+    <h2 class="mt-4 mb-3">Medicine Analytics</h2>
     <ul class="list-group mb-4">
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>Total Medicines</span>
@@ -30,13 +30,15 @@
     </ul>
 
     <div class="row mb-4">
-        <div class="col-md-6" id="manufacturerBarChartArea">
-            <h5 class="mb-2">Top 3 Manufacturers (by number of medicines)</h5>
+        <div class="col-md-6 d-flex flex-column align-items-center" id="manufacturerBarChartArea">
+            <h3 class="mb-2">Top 3 Manufacturers (by number of medicines)</h3>
             <canvas id="manufacturerBarChart" height="200"></canvas>
         </div>
-        <div class="col-md-6" id="ratingsPieChartArea">
-            <h5 class="mb-2">Ratings Distribution</h5>
-            <canvas id="ratingsPieChart" height="200"></canvas>
+        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center" id="ratingsPieChartArea">
+            <h3 class="mb-2">Ratings Distribution</h3>
+            <div style="max-width:340px;width:100%;display:flex;justify-content:center;">
+                <canvas id="ratingsPieChart" height="340" width="340" style="max-width:100%;height:auto;"></canvas>
+            </div>
         </div>
     </div>
 
@@ -92,8 +94,11 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: { legend: { position: 'bottom' } }
             }
         });
+
+        // Ratings Distribution chart removed
     </script>
 {% endblock %}
