@@ -361,13 +361,20 @@ This process ensured that the final implementation closely matched the original 
   - Used a small sample of medicines for initial testing to ensure features worked as expected before scaling up.
   - Manually checked edge cases, such as empty cart, duplicate items, and invalid form submissions.
  
-## Lighthouse Reports 
+## Lighthouse Reports
+Home
 <img width="1565" height="836" alt="Home_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/9ebf77b5-ec7b-4542-9f03-411af6463338" />
+Medicines List
 <img width="1518" height="835" alt="Medicines List_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/38e3b7b8-b432-4fd0-86e5-1dcf445360d4" />
+Similar Medicines
 <img width="1555" height="831" alt="Similar_Meds_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/17d0ccdb-fbad-411d-82b6-22c56386e0d4" />
+Shopping Cart
 <img width="1511" height="833" alt="Cart_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/75a9d29b-83b5-4b98-839e-ccf0478add40" />
+Healthcare Dashboard
 <img width="1542" height="838" alt="Healthcare_Dashboard_Screenshot" src="https://github.com/user-attachments/assets/0577330e-221c-419b-b3cd-04d0a25cbc1a" />
+Login
 <img width="1557" height="842" alt="Login_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/521ef160-a0f2-4c52-b59b-a06e7b254a54" />
+Sign Up
 <img width="1507" height="807" alt="Sign-UP_Lighthouse_Screenshot" src="https://github.com/user-attachments/assets/fd402194-1759-4b8e-afac-edd7ff866799" />
 
 ## 🤖 AI Usage
