@@ -207,7 +207,7 @@ def home(request):
 
 def medicine_list(request):
     """Display a list of medicines with search, filter, and sort options."""
-    query = request.GET.get('q', '')
+    query = request.GET.get('search', '')
     sort = request.GET.get('sort', 'name')
     order = request.GET.get('order', 'asc')
     rating_filter = request.GET.get('rating', '')
@@ -225,21 +225,17 @@ def medicine_list(request):
         except ValueError:
             pass
 
-    # Sorting (Vitamin D Gummies last)
-    if sort == 'price':
-        sort_field = 'price' if order == 'asc' else '-price'
-        medicines = medicines.order_by(sort_field)
-    elif sort == 'rating':
-        sort_field = 'rating' if order == 'asc' else '-rating'
-        medicines = medicines.order_by(sort_field)
-    elif sort == 'formula':
-        sort_field = 'formula' if order == 'asc' else '-formula'
-        medicines = medicines.order_by(sort_field)
-    elif sort == 'manufacturer':
-        sort_field = 'manufacturer' if order == 'asc' else '-manufacturer'
-        medicines = medicines.order_by(sort_field)
-    else:
-        medicines = medicines.order_by('medicine_name')
+    # Sorting logic
+    sort_fields = {
+        'name': 'medicine_name',
+        'formula': 'formula',
+        'price': 'price',
+        'rating': 'rating',
+    }
+    sort_field = sort_fields.get(sort, 'medicine_name')
+    if order == 'desc':
+        sort_field = '-' + sort_field
+    medicines = medicines.order_by(sort_field, 'medicine_name')
 
     # Move Vitamin D Gummies to the end
     vitamin_d_gummies = medicines.filter(medicine_name__iexact='Vitamin D Gummies')
