@@ -18,16 +18,7 @@
             <li><strong class="text-primary">Price:</strong> £{{ medicine.price }}</li>
             <li><strong class="text-primary">Rating:</strong> {{ medicine.rating }}</li>
           </ul>
-          <table class="table table-bordered mt-4">
-            <tr>
-              <th>Medicine Name</th>
-              <td>{{ medicine.medicine_name }}</td>
-            </tr>
-            <tr>
-              <th>Common Usage</th>
-              <td>{{ medicine.common_usage|default:"N/A" }}</td>
-            </tr>
-          </table>
+        
           <h2>Similar Medicines</h2>
           {% if similar_meds %}
             <ul>
