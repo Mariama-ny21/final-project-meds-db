@@ -131,16 +131,24 @@ from django.shortcuts import redirect, render
 
 from django import forms as djforms
 class CustomUserCreationForm(UserCreationForm):
+    email = djforms.EmailField(required=True, label="Email address")
     is_healthcare_professional = djforms.BooleanField(
         required=False,
         label="I am a healthcare professional"
     )
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields
+        fields = UserCreationForm.Meta.fields + ('email',)
         help_texts = {
             'username': '',  # Remove or customize help text here
         }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
 
 def register(request):
     """Register a new user using a custom user creation form, with role."""
