@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <h5 class="card-title mb-1" style="font-size:1.3rem;"><a href="{% url 'medicine_detail' med.pk %}" class="link-primary text-decoration-none">{{ med.medicine_name }}</a></h5>
                     <h6 class="card-subtitle mb-2 text-muted">({{ med.formula }})</h6>
-                    <p class="mb-1"><strong>Dose:</strong> {{ med.dose }}</p>
+                    <p class="mb-1"><strong>Dose & Qty:</strong> {{ med.dose }}</p>
                     <p class="mb-1"><strong>Manufacturer:</strong> {{ med.manufacturer }}</p>
                     <p class="mb-1"><strong>Price:</strong> £{{ med.price }}</p>
                     <p class="mb-1"><strong>Rating:</strong> {{ med.rating }}</p>
