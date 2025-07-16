@@ -1,11 +1,25 @@
+import json
+import stripe
 
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models_profile import UserProfile
-from .models import Medicine
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.db import models
 from django.db.models import Avg, Count
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from .models import Medicine
+from .models_profile import UserProfile
+
+from django import forms
+from django import forms as djforms
+
 
 # Decorator to restrict view to healthcare professionals
 def healthcare_professional_required(view_func):
+
     @login_required
     def _wrapped_view(request, *args, **kwargs):
         try:
@@ -15,9 +29,12 @@ def healthcare_professional_required(view_func):
         except UserProfile.DoesNotExist:
             pass
         from django.http import HttpResponseForbidden
-        return HttpResponseForbidden("You do not have permission to access this page.")
+        return HttpResponseForbidden(
+            "You do not have permission to access this page."
+        )
     return _wrapped_view
 
+  
 # Healthcare Dashboard view with analytics
 @healthcare_professional_required
 def healthcare_dashboard(request):
@@ -26,6 +43,7 @@ def healthcare_dashboard(request):
         avg=Avg('price'),
         min_price=models.Min('price'),
         max_price=models.Max('price'),
+    
         avg_rating=Avg('rating')
     )
     avg_price = agg['avg']
@@ -37,23 +55,27 @@ def healthcare_dashboard(request):
         .annotate(count=Count('id'))
         .order_by('-count')[:3]
     )
-    # For Chart.js: labels and counts for top manufacturers
     manufacturer_labels = [m['manufacturer'] for m in top_manufacturers]
+
     manufacturer_counts = [m['count'] for m in top_manufacturers]
 
     # Find medicine names for min and max price
     min_price_medicine = Medicine.objects.filter(price=min_price).first()
     max_price_medicine = Medicine.objects.filter(price=max_price).first()
-    min_price_medicine_name = min_price_medicine.medicine_name if min_price_medicine else 'N/A'
-    max_price_medicine_name = max_price_medicine.medicine_name if max_price_medicine else 'N/A'
+    min_price_medicine_name = (
+        min_price_medicine.medicine_name if min_price_medicine else 'N/A'
+    )
+    max_price_medicine_name = (
+        max_price_medicine.medicine_name if max_price_medicine else 'N/A'
+    )
 
     # Ratings distribution (1-5 stars)
     ratings_distribution = [
-        Medicine.objects.filter(rating__gte=i, rating__lt=i+1).count() for i in range(1, 5)
+        Medicine.objects.filter(rating__gte=i, rating__lt=i + 1).count()
+        for i in range(1, 5)
     ]
     ratings_distribution.append(Medicine.objects.filter(rating=5).count())
 
-    import json
     return render(request, 'sample_uk_meds/healthcare_dashboard.html', {
         'total_meds': total_meds,
         'avg_price': avg_price,
@@ -68,22 +90,22 @@ def healthcare_dashboard(request):
         'ratings_distribution': json.dumps(ratings_distribution),
     })
 
+
 """
 views.py
---------
-Contains all view functions for the sample_uk_meds app, including CRUD for medicines,
-user registration, cart management, and Stripe payment integration.
 """
 
-from django.urls import reverse
-from .models import Medicine
-from django import forms
 
 # Medicine form for create/update
+
 class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
-        fields = ['medicine_name', 'formula', 'dose', 'manufacturer', 'price', 'rating', 'emc_leaflet_url', 'common_usage']
+        fields = [
+            'medicine_name', 'formula', 'dose', 'manufacturer', 'price',
+            'rating', 'emc_leaflet_url', 'common_usage'
+        ]
+
 
 # CREATE
 def medicine_create(request):
@@ -95,7 +117,12 @@ def medicine_create(request):
             return redirect('medicine_list')
     else:
         form = MedicineForm()
-    return render(request, 'sample_uk_meds/medicine_form.html', {'form': form, 'action': 'Add'})
+    return render(
+        request,
+        'sample_uk_meds/medicine_form.html',
+        {'form': form, 'action': 'Add'}
+    )
+
 
 # UPDATE
 def medicine_update(request, pk):
@@ -108,7 +135,12 @@ def medicine_update(request, pk):
             return redirect('medicine_detail', pk=medicine.pk)
     else:
         form = MedicineForm(instance=medicine)
-    return render(request, 'sample_uk_meds/medicine_form.html', {'form': form, 'action': 'Edit'})
+    return render(
+        request,
+        'sample_uk_meds/medicine_form.html',
+        {'form': form, 'action': 'Edit'}
+    )
+
 
 # DELETE
 def medicine_delete(request, pk):
@@ -117,25 +149,21 @@ def medicine_delete(request, pk):
     if request.method == 'POST':
         medicine.delete()
         return redirect('medicine_list')
-    return render(request, 'sample_uk_meds/medicine_confirm_delete.html', {'medicine': medicine})
-
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from .models_profile import UserProfile
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.shortcuts import redirect, render
+    return render(
+        request,
+        'sample_uk_meds/medicine_confirm_delete.html',
+        {'medicine': medicine}
+    )
 
 
-# Custom UserCreationForm to remove username help text
-
-from django import forms as djforms
+# CustomUserCreationForm to remove username help text
 class CustomUserCreationForm(UserCreationForm):
     email = djforms.EmailField(required=True, label="Email address")
     is_healthcare_professional = djforms.BooleanField(
         required=False,
         label="I am a healthcare professional"
     )
+
     class Meta(UserCreationForm.Meta):
         model = User
         fields = UserCreationForm.Meta.fields + ('email',)
@@ -150,6 +178,7 @@ class CustomUserCreationForm(UserCreationForm):
             user.save()
         return user
 
+
 def register(request):
     """Register a new user using a custom user creation form, with role."""
     if request.method == 'POST':
@@ -157,21 +186,22 @@ def register(request):
         if form.is_valid():
             user = form.save()
             is_hp = form.cleaned_data.get('is_healthcare_professional', False)
-            UserProfile.objects.create(user=user, is_healthcare_professional=is_hp)
-            messages.success(request, 'Account created successfully! You can now log in.')
+            UserProfile.objects.create(
+                user=user,
+                is_healthcare_professional=is_hp
+            )
+            messages.success(
+                request,
+                'Account created successfully! You can now log in.'
+            )
             return redirect('login')
     else:
         form = CustomUserCreationForm()
     return render(request, 'sample_uk_meds/register.html', {'form': form})
 
-import stripe
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Medicine
-from django.db import models
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-# Create your views here.
+
 
 def buy_medicine(request, pk):
     """Start a Stripe checkout session for a single medicine purchase."""
@@ -182,7 +212,6 @@ def buy_medicine(request, pk):
     except ValueError:
         price_pence = 100  # fallback to £1.00 if price is invalid
 
-    from django.urls import reverse
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=[{
@@ -201,12 +230,16 @@ def buy_medicine(request, pk):
     )
     return redirect(session.url, code=303)
 
+
 def payment_success(request):
-    """Render the payment success page after Stripe checkout."""
+    """Render the payment success page after Stripe checkout and clear the cart."""
+    if 'cart' in request.session:
+        del request.session['cart']
     return render(request, 'sample_uk_meds/payment_success.html')
 
 
 # Create your views here.
+
 
 def home(request):
     """Render the home page."""
@@ -246,7 +279,9 @@ def medicine_list(request):
     medicines = medicines.order_by(sort_field, 'medicine_name')
 
     # Move Vitamin D Gummies to the end
-    vitamin_d_gummies = medicines.filter(medicine_name__iexact='Vitamin D Gummies')
+    vitamin_d_gummies = medicines.filter(
+        medicine_name__iexact='Vitamin D Gummies'
+    )
     medicines = medicines.exclude(medicine_name__iexact='Vitamin D Gummies')
     medicines = list(medicines) + list(vitamin_d_gummies)
 
@@ -281,9 +316,9 @@ def medicine_detail(request, pk):
         'sample_uk_meds/medicine_detail.html',
         {'medicine': medicine, 'similar_meds': similar_meds}
     )
-
+    
 # --- CART VIEWS ---
-from django.http import JsonResponse
+
 
 def add_to_cart(request, pk):
     """Add a medicine to the session-based cart."""
@@ -291,6 +326,7 @@ def add_to_cart(request, pk):
     cart[str(pk)] = cart.get(str(pk), 0) + 1
     request.session['cart'] = cart
     return redirect('view_cart')
+    
 
 def view_cart(request):
     """Display the contents of the cart and the total price."""
@@ -302,11 +338,20 @@ def view_cart(request):
             med = Medicine.objects.get(pk=pk)
             price = float(str(med.price).replace('£', '').strip())
             subtotal = price * qty
-            medicines.append({'medicine': med, 'quantity': qty, 'subtotal': subtotal})
+            medicines.append({
+                'medicine': med,
+                'quantity': qty,
+                'subtotal': subtotal
+            })
             total += subtotal
         except Medicine.DoesNotExist:
             continue
-    return render(request, 'sample_uk_meds/cart.html', {'cart_items': medicines, 'total': total})
+    return render(
+        request,
+        'sample_uk_meds/cart.html',
+        {'cart_items': medicines, 'total': total}
+    )
+
 
 def remove_from_cart(request, pk):
     """Remove a medicine from the session-based cart."""
@@ -318,8 +363,7 @@ def remove_from_cart(request, pk):
 
 
 # --- CART CHECKOUT VIEW ---
-import stripe
-from django.conf import settings
+
 
 def cart_checkout(request):
     """Start a Stripe checkout session for all items in the cart."""
