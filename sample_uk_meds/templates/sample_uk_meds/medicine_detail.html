@@ -16,7 +16,15 @@
             <li><strong class="text-primary">Dose & Qty:</strong> {{ medicine.dose }}</li>
             <li><strong class="text-primary">Manufacturer:</strong> {{ medicine.manufacturer }}</li>
             <li><strong class="text-primary">Price:</strong> £{{ medicine.price }}</li>
-            <li><strong class="text-primary">Rating:</strong> {{ medicine.rating }}</li>
+            <li><strong class="text-primary">Rating:</strong>
+                {% with rounded=medicine.rating|floatformat:0 %}
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= rounded|add:'0' %}
+                            <span style="color: #ffc107;">&#9733;</span>
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+            </li>
           </ul>
         
           <h2>Similar Medicines</h2>

@@ -129,7 +129,15 @@
                     <p class="mb-1"><strong>Dose & Qty:</strong> {{ med.dose }}</p>
                     <p class="mb-1"><strong>Manufacturer:</strong> {{ med.manufacturer }}</p>
                     <p class="mb-1"><strong>Price:</strong> £{{ med.price }}</p>
-                    <p class="mb-1"><strong>Rating:</strong> {{ med.rating }}</p>
+                    <p class="mb-1"><strong>Rating:</strong>
+                        {% with rounded=med.rating|floatformat:0 %}
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= rounded|add:'0' %}
+                                    <span style="color: #ffc107;">&#9733;</span>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </p>
                     {% if med.emc_leaflet_url %}
                         <p class="mb-1"><strong>EMC Leaflet:</strong> <a href="{{ med.emc_leaflet_url }}" target="_blank" rel="noopener" class="text-success">View leaflet</a></p>
                     {% endif %}
