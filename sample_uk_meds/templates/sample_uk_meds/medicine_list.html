@@ -24,7 +24,7 @@
                         <a class="nav-link text-white{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white{% if request.path == '/medicines/' %} active{% endif %}" href="{% url 'medicine_list' %}">Browse Medicines</a>
+                        <a class="nav-link text-white{% if request.path == '/medicines/' %} active{% endif %}" href="{% url 'medicine_list' %}">Medicines</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white position-relative" href="{% url 'view_cart' %}" style="min-width: 48px;">
