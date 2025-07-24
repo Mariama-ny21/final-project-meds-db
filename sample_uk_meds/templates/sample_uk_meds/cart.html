@@ -1,5 +1,76 @@
-{% extends 'base.html' %}
+
 {% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - UK Medicines Finder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v={{ now|date:'U' }}">
+</head>
+<body style="background: #fff !important;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Meds Demo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white{% if request.path == '/medicines/' %} active{% endif %}" href="{% url 'medicine_list' %}">Medicines</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white position-relative" href="{% url 'view_cart' %}" style="min-width: 48px;">
+                            Cart
+                            {% if cart_count and cart_count > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.75rem;">
+                                    {{ cart_count }}
+                                    <span class="visually-hidden">items in cart</span>
+                                </span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#contact">Contact</a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                        {# Show Healthcare Dashboard link if user is a healthcare professional, handle missing profile gracefully #}
+                        {% if user.userprofile and user.userprofile.is_healthcare_professional %}
+                            <li class="nav-item">
+                                <a class="nav-link text-warning fw-bold" href="{% url 'healthcare_dashboard' %}">Healthcare Dashboard</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <span class="navbar-text text-white me-2 welcome-user">Welcome, {{ user.username }}!</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-light btn-sm ms-1" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="btn btn-light btn-sm mb-2 mb-lg-0 me-lg-2" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-success btn-sm" href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 <div class="container mt-4">
     <h2 id="cart-heading">Your Shopping Cart</h2>
     {% if cart_items %}
@@ -43,3 +114,6 @@
     <a href="{% url 'medicine_list' %}" class="btn btn-secondary mt-3">Continue Shopping</a>
 </div>
 {% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+</html>
